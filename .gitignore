@@ -1,0 +1,82 @@
+# --- Environment / secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Python (backend) ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+dist/
+build/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/build/
+.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Data stores / local infra state ---
+# SQLite application database
+*.db
+*.sqlite
+*.sqlite3
+# Neo4j local data volume (when not run purely via Docker volumes)
+neo4j/data/
+neo4j/logs/
+# ChromaDB persistent store
+chroma/
+.chroma/
+# Whole local data directory (SQLite db, Chroma vectors, ingested
+# repos/workspaces) — resolved under the repo root or backend/ depending
+# on where the backend is launched from, see docs/HANDOVER.md "Backing
+# up Neo4j / Chroma / SQLite". Never pushed — it's per-machine state.
+data/
+backend/data/
+# Test-local scratch data (backend/tests/.test-data/)
+backend/tests/.test-data/
+
+# --- Ingestion workspaces ---
+# Per-repository_id clones/checkouts used during ingestion
+workspaces/
+tmp/
+
+# --- Local model weight caches ---
+# Downloaded embedding/LLM model weight files, however they land locally
+# (e.g. a manually-placed GGUF, or a cache dir outside the standard
+# Hugging Face cache). Never pushed — these are large, regenerable
+# downloads, not source.
+*.gguf
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# --- Editors / OS / local agent tooling ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+# Local Claude Code settings/state — per-machine, not shared config
+.claude/
+
+# --- Logs ---
+*.log
+logs/
